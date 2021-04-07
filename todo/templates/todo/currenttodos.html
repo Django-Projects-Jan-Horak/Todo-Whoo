@@ -1,0 +1,45 @@
+{% extends 'todo/base.html' %} {% block content %}
+
+  <h1>Current Todos</h1>
+
+
+  <div class="row">
+    <div class="col-4">
+
+      <div class="list-group" id="list-tab" role="tablist">
+        {% for todo in todos %}
+      
+        {% if todo.is_important %}  <a class="list-group-item list-group-item-action bg-warning" id="{{todo.id}}" data-toggle="list" href="#list{{todo.id}}" role="tab">{{todo.title}}</a>  
+        {% else %}   <a class="list-group-item list-group-item-action" id="{{todo.id}}" data-toggle="list" href="#list{{todo.id}}" role="tab">{{todo.title}}</a>{% endif %} 
+        
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-8 description">
+      <div class="tab-content" id="nav-tabContent">
+        {% for todo in todos %}
+        {% if todo.is_important %} <div class="tab-pane fade bg-warning px-3 py-2 rounded" id="list{{todo.id}}" role="tabpanel"><p>{{todo.memo}}</p>
+          {% else %} <div class="tab-pane fade bg-info px-3 py-2 rounded" id="list{{todo.id}}" role="tabpanel" >{{todo.memo}}  {% endif %} 
+            <hr>
+          <div style="display: flex;">
+            <form method="POST" action="{% url 'completetodo' todo.id %}">
+              {% csrf_token %} 
+              <button type="submit" class="btn btn-primary">Complete</button>
+            </form>
+            <form method="GET" action="{% url 'viewtodo' todo.id %}">
+              {% csrf_token %} 
+              <button type="submit" class="btn btn-dark">Edit</button>
+            
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+      </div>
+
+      {% endblock %}
+    </div>
+  </div>
