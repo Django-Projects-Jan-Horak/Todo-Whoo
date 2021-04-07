@@ -1,4 +1,23 @@
 {% extends 'todo/base.html' %} {% block content %}
-<h1>Home Page</h1>
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column text-center bg-dark text-light rounded">
+    <main role="main" class="inner cover">
+{% if user.is_authenticated %}
+<h1 class="cover-heading my-5">Let's <a href="{%url 'createtodo'%}">create</a> some todos. It's fun.</h1>
+<p class="lead my-5">Or you can check your <a href="{% url 'currenttodos'%}">Current Todos Here!</a> or all of your <a href=" {% url 'completedtodos' %} ">Completed Todos Here</a>. If you wanna know something about this app you can click <a href="#">Here</a> or click the button bellow.</p>
+<p class="lead">
+  <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+{% else %}
+<h1 class="cover-heading my-5">Hello! Go ahead & create some todooos whooo!</h1>
+<p class="lead my-5">Create an account for free. It takes only 5 seconds. Then you can start creating your todos in our user-friendly interface. So <a href="{%url 'signupuser'%}">Sign Up</a> now.</p>
+<p class="lead">
+  <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+</p>
+{% endif %}
+
+      
+    </main>
+
+  </div>
+
 
 {% endblock %}

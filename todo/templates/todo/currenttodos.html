@@ -2,8 +2,13 @@
 
   <h1>Current Todos</h1>
 
-
-  <div class="row">
+{% if todos|length < 1 %}
+  <h2>Good Job! you've got all your todos done! Let's create new ones!</h2>
+  <a href="{% url 'createtodo' %}" class="btn btn-info">Create new</a>
+  
+{% else %}
+  
+  <div class="row mt-3">
     <div class="col-4">
 
       <div class="list-group" id="list-tab" role="tablist">
@@ -38,8 +43,8 @@
       </div>
     </div>
   </div>
-      </div>
-
-      {% endblock %}
-    </div>
   </div>
+      {% endif %}
+    
+      {% endblock %}
+    
